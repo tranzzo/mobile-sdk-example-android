@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="card_number" translatable="false">4242424242424242</string>
+    <string name="card_date" translatable="false">1124</string>
+    <string name="card_cvv" translatable="false">545</string>
+    <string name="key" translatable="false">b3NDcDVRclM4b0FwTzgzNFY3SVcyV1Qz</string>
+</resources>
