@@ -3,7 +3,7 @@
 Payment screen consist of UI sections. Some of sections can be replaced by merchant from already
 constructed parts and some not.
 
-| Description             | ![img_6.png](img_6.png)  | ![img_7.png](img_7.png) |
+| Description             | ![img_6.png](app/src/img_6.png)  | ![img_7.png](app/src/img_7.png) |
 |  :------------------:   |  :-------------------:   |  :------------------:   |
 | 1 part (amount section)    | UI section which includes input field for entering amount and GPay button (optional) | UI section which includes fixed amount and GPay button (optional). Amount can't be changed |
 | 2 part (card data section) | The form for entering card data  |  The form for entering card data |
@@ -98,7 +98,7 @@ val keyConfig = KeyConfig(
 
 In general the scheme of obtaining `KeyConfig` data looks like: 
 
-![img_8.png](img_8.png)
+![img_8.png](app/src/img_8.png)
 
 
 b) Create `CustomerData` object that contains all your necessary data:
@@ -133,7 +133,7 @@ c) Create `AmountType` object that contains all necessary information about paym
 
   The UI example with fixed amount and product description:
 
-  ![img_3.png](img_3.png)
+  ![img_3.png](app/src/img_3.png)
 
 
 - In case user can change the amount of payment by themself you need to create the next object:
@@ -153,11 +153,11 @@ c) Create `AmountType` object that contains all necessary information about paym
 
   The UI example with free to change amount, `prefillAmount` and product description:
 
-  ![img_4.png](img_4.png)
+  ![img_4.png](app/src/img_4.png)
 
   The UI example with free to change amount, description and empty `prefillAmount`.
 
-  ![img_5.png](img_5.png)
+  ![img_5.png](app/src/img_5.png)
 
 #### 5) Make a request for payment processing
 
