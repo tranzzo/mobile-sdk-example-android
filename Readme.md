@@ -1,13 +1,13 @@
 # UI overview
 
-Payment screen consist of UI sections. Some of sections can be replaced by merchant from already
-constructed parts and some not.
+Payment screen consists of UI sections. Some of the sections can be replaced by merchant from already
+constructed parts and some can't.
 
 | Description             | ![img_6.png](app/src/img_6.png)  | ![img_7.png](app/src/img_7.png) |
 |  :------------------:   |  :-------------------:   |  :------------------:   |
-| 1 part (amount section)    | UI section which includes input field for entering amount and GPay button (optional) | UI section which includes fixed amount and GPay button (optional). Amount can't be changed |
-| 2 part (card data section) | The form for entering card data  |  The form for entering card data |
-| Pay button                 | Goes active when user fill all data in in amount part (1 part) and card section (2 part)  | Goes active when user fill all card data in card section (2 part)
+| 1st part (amount section)    | UI section which includes input field for entering amount and GPay button (optional) | UI section which includes fixed amount and GPay button (optional). Amount can't be changed |
+| 2nd part (card data section) | The form for entering card data  |  The form for entering card data |
+| Pay button                 | Goes active when user fills out all data in amount part (1st part) and card section (2nd part)  | Goes active when user fill out all card data in card section (2nd part)
 
 # Installation process:
 
@@ -48,8 +48,8 @@ Pass the `SdkEnvironment.TEST` to the `sdkEnvironment` and to `GooglePayConfig.e
 want to test your payments with **test payment terminals**, otherwise pass the `SdkEnvironment.PROD`
 .
 
-`googlePayConfig` is `null` by default. This config gives the possibility to user to pay with
-GooglePay. In case this config is `null` user wouldn't see any GooglePay button on UI.
+`googlePayConfig` is `null` by default. This config gives user the possibility to pay with
+GooglePay. In case this config is `null` user will not see any GooglePay button on UI.
 
 #### 3) Register for result in your `Activity` or `Fragment` in `onCreate()` method.
 
@@ -69,9 +69,9 @@ override fun onCreate() {
 `PaymentContractInput` class that you will create for payment creation and processing.
 
 `PaymentContractOutput` class that will provide you with an information about payment result.
-`PaymentContractOutput` will be the one possible instances of: `Success` or `Error`, or `Cancel`.
+`PaymentContractOutput` will be one of following possible instances: `Success` or `Error`, or `Cancel`.
 
-`Cancel` occurs when user press *back button* on payment screen.
+`Cancel` occurs when user presses *back button* on payment screen.
 
 `Error` is a `sealed class` for error's representation. Below you can find a table of errors and their description:
 
@@ -94,7 +94,7 @@ val keyConfig = KeyConfig(
     posId = "your_pos_id",
 )
 ```
-**Merchant (your) backand should provide this data to your app.** 
+**Merchant (your) backend should provide this data to your app.** 
 
 In general the scheme of obtaining `KeyConfig` data looks like: 
 
@@ -136,7 +136,7 @@ c) Create `AmountType` object that contains all necessary information about paym
   ![img_3.png](app/src/img_3.png)
 
 
-- In case user can change the amount of payment by themself you need to create the next object:
+- In case user can change the amount of payment by himself you need to create the next object:
     ```kotlin
     val amountType = AmountType.FreeAmount(
             prefillAmount = listOf(100, 200, 300), // list of already predefined amount values.
@@ -145,17 +145,17 @@ c) Create `AmountType` object that contains all necessary information about paym
             orderId = "your_order_id",
         )
     ```
-  `prefillAmount` is a list of already predefined amount values. Can be empty, but not empty by
+  `prefillAmount` is a list of already predefined amount values. Can be empty, but isn't empty by
   default.
 
   `description` is the text will be displayed to user on the payment screen. Please, provide a
   readable product description.
 
-  The UI example with free to change amount, `prefillAmount` and product description:
+  The UI example with customizable amount, `prefillAmount` and product description:
 
   ![img_4.png](app/src/img_4.png)
 
-  The UI example with free to change amount, description and empty `prefillAmount`.
+  The UI example with customizable amount, description and empty `prefillAmount`.
 
   ![img_5.png](app/src/img_5.png)
 
@@ -175,10 +175,10 @@ That's it. Wait for response in point #3 of this list.
 # UI customization
 
 ### Colors
-SDK has a many colors, but almost all app appearance is going around main color - `tranzzo_primary_color`.
+SDK has many colors, but almost all app appearance is based on main color - `tranzzo_primary_color`.
 This color builds SDK appearance by applying alpha color component. 
-For example the *Pay button* has a `tranzzo_primary_color` color, but in enabled state its alpha is 100% 
-and in disable state is only about 30%. Background color is based on main color with 8% alpha.
+For example, the *Pay button* has a `tranzzo_primary_color` color, but in enabled state its alpha is 100% 
+and in disabled state is only about 30%. Background color is based on main color with 8% alpha.
 To change the UI colors override the color resources in xml.  
 The colors table: 
 ```xml
