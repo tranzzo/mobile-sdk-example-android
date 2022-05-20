@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import ua.tranzzo.checkout_sdk.model.AmountType
 import ua.tranzzo.checkout_sdk.model.CardModel
@@ -58,11 +59,20 @@ class MainActivity : AppCompatActivity() {
     @Suppress("MagicNumber")
     private fun getFreePayment(): AmountType {
         return AmountType.FreeAmount(
-            prefillAmount = emptyList(),
+            prefillAmount = listOf(1, 2, 3),
             description = "Test description",
             orderId = UUID.randomUUID().toString(),
         )
     }
+
+//    @Suppress("MagicNumber")
+//    private fun getFreePayment(): AmountType {
+//        return AmountType.FreeAmount(
+//            prefillAmount = emptyList(),
+//            description = "Test description",
+//            orderId = UUID.randomUUID().toString(),
+//        )
+//    }
 
     private fun findViews() {
         freeButton = findViewById(R.id.free_test_button)
@@ -77,6 +87,7 @@ class MainActivity : AppCompatActivity() {
     private fun registerForPaymentResult() {
         paymentLauncher =
             registerForActivityResult(PaymentContract()) { output: PaymentContractOutput ->
+                Toast.makeText(this, output.toString(), Toast.LENGTH_LONG).show()
                 Log.i("TAG", "Got some value: $output")
             }
     }

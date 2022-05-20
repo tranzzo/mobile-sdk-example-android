@@ -21,8 +21,8 @@ Add following code to your `settings.gradle` file in `repositories` section:
  repositories {
         maven {
             credentials {
-                username "merchant_sdk"
-                password "Knn7653Hgdgwk"
+              username "merchant_username"
+              password "merchant_password"
             }
             url "https://nexus.tranzzo.com/repository/merchant-release-mvn/"
         }
