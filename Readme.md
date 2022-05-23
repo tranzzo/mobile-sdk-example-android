@@ -34,22 +34,32 @@ Add following code to your `settings.gradle` file in `repositories` section:
 ```kotlin
 TranzzoPaymentSDK.init(
     sdkEnvironment = SdkEnvironment.TEST / SdkEnvironment.PROD,
-    googlePayConfig = GooglePayConfig(
-        merchantName = "your_merchant_name",
-        merchantId = "your_merchant_id",
-        environment = SdkEnvironment.TEST / SdkEnvironment.PROD
-    ), // null by default
+    googlePayConfig = GooglePayConfig(...), // null by default
     currency = "USD",
     countryCode = "USA"
 )
 ```
-
-Pass the `SdkEnvironment.TEST` to the `sdkEnvironment` and to `GooglePayConfig.environment` if you
-want to test your payments with **test payment terminals**, otherwise pass the `SdkEnvironment.PROD`
-.
-
 `googlePayConfig` is `null` by default. This config gives user the possibility to pay with
 GooglePay. In case this config is `null` user will not see any GooglePay button on UI.
+
+```kotlin
+GooglePayConfig(
+        merchantName = "your_merchant_name",
+        merchantId = "your_merchant_id",
+        environment = SdkEnvironment.TEST / SdkEnvironment.PROD
+    )
+```
+`merchantName` is displayed in the payment list. 
+
+`merchantId` is Google merchant identifier. Get it during the registration process in the Google
+Pay Business Console. You can find more information about `merchantName` and `merchantId` [here](https://developers.google.com/pay/api/web/reference/request-objects#MerchantInfo).
+
+Pass the `SdkEnvironment.TEST` to the `sdkEnvironment` and to `GooglePayConfig.environment` if you
+want to test your payments with **test payment terminals**, otherwise pass the `SdkEnvironment.PROD`.
+For `TEST` in `GooglePayConfig.environment` set the `merchantId = "01234567890123456789"` and join
+the test group via [link](https://groups.google.com/forum/?hl=ru#!forum/googlepay-test-mode-stub-data) 
+with your application production account.
+For more details about testing GooglePay visit this [link](https://developers.google.com/pay/api/android/guides/resources/test-card-suite).
 
 #### 3) Register for result in your `Activity` or `Fragment` in `onCreate()` method.
 
