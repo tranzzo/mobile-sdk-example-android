@@ -10,5 +10,10 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-// Example:
-## [0.0.1] - 05.05.20225
+---
+
+## [3.0.1] - 11.08.2022
+
+### Fixed
+
+- Fix redirect url

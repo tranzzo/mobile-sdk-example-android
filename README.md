@@ -14,7 +14,7 @@ constructed parts and some can't.
 #### 1) Add the dependency in the project:
 Add following dependency in `build.gradle`:
 
-```implementation 'com.tranzzo.android:payment_merchant:3.0.0-rc11'```.
+```implementation 'com.tranzzo.android:payment_merchant:3.0.1'```.
 
 Add following code to your `settings.gradle` file in `repositories` section:
 ```groovy
@@ -168,6 +168,30 @@ c) Create `AmountType` object that contains all necessary information about paym
   The UI example with customizable amount, description and empty `prefillAmount`.
 
   ![img_5.png](app/src/img_5.png)
+
+
+d) Create `AdditionalData` object that contains all additional information. 
+
+```kotlin
+// not required
+val additionalData = AdditionalData(
+    // required, default = PaymentMethod.PURCHASE 
+    method = PaymentMethod.PURCHASE, // PaymentMethod.PURCHASE or PaymentMethod.AUTH
+    // not required, default = null
+    serverUrl = "", // String
+    // not required, default = null
+    products = emptyList(), // List<Product>
+    // not required, default = null
+    merchantMcc = "", // String
+    // not required, default = null
+    payload = "", // String
+)
+```
+>`method` - payment method according with your business. \
+`serverUrl` - callback url on your server \
+`products` - array of products that are being paid for. \
+`merchantMcc` - MCC for this transaction. \
+`payload` - custom string data. Max 4000 symbols.
 
 #### 5) Make a request for payment processing
 

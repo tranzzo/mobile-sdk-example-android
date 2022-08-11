@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import ua.tranzzo.checkout_sdk.model.AmountType
-import ua.tranzzo.checkout_sdk.model.CardModel
 import ua.tranzzo.checkout_sdk.model.CustomerData
 import ua.tranzzo.checkout_sdk.model.KeyConfig
 import ua.tranzzo.checkout_sdk.model.PaymentContract
