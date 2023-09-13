@@ -77,7 +77,7 @@ override fun onCreate() {
 }
 ```
 
-`PaymentContractInput` class that you will create for payment creation and processing.
+`PaymentContractInput` class that you will fill up with data for payment creation and processing. Object creation is described below from point 4) to point 5) in the list.
 
 `PaymentContractOutput` class that will provide you with an information about payment result.
 `PaymentContractOutput` will be one of following possible instances: `Success` or `Error`, or `Cancel`.
@@ -95,6 +95,18 @@ override fun onCreate() {
 
 
 #### 4) Prepare payment data for sending:
+For sending data to the library you need to initialize the library provided data holder object `PaymentContractInput`. The structure of `PaymentContractInput`: 
+```kotlin
+// library code
+data class PaymentContractInput(
+    val keyConfig: KeyConfig,
+    val customerData: CustomerData,
+    val amountType: AmountType,
+    val additionalData: AdditionalData = AdditionalData(),
+    val cardModel: CardModel = CardModel(),
+)
+```
+Follow me for `PaymentContractInput` creation:
 
 a) Create `KeyConfig` object:
 
@@ -137,10 +149,12 @@ c) Create `AmountType` object that contains all necessary information about paym
         amount = 1.11, // Double
         description = "your_product_description",
         orderId = "your_order_id",
+        tokens = listOf<CardToken>(), // optional, emptyList() by default
    )
     ```
   `description` is the text will be displayed to user on the payment screen. Please, provide a
   readable product description.
+  `tokens` is the list of `CardToken` objects. Empty by default. 
 
   The UI example with fixed amount and product description:
 
@@ -154,6 +168,7 @@ c) Create `AmountType` object that contains all necessary information about paym
                                                    // Can be empty
             description = "your_product_description",
             orderId = "your_order_id",
+            tokens = listOf<CardToken>(), // optional, emptyList() by default
         )
     ```
   `prefillAmount` is a list of already predefined amount values. Can be empty, but isn't empty by
@@ -161,12 +176,13 @@ c) Create `AmountType` object that contains all necessary information about paym
 
   `description` is the text will be displayed to user on the payment screen. Please, provide a
   readable product description.
+  `tokens` is the list of `CardToken` objects. Empty by default. 
 
-  The UI example with customizable amount, `prefillAmount` and product description:
+  The UI example with customizable amount, `prefillAmount` and product `description`:
 
   ![img_4.png](app/src/img_4.png)
 
-  The UI example with customizable amount, description and empty `prefillAmount`.
+  The UI example with customizable amount, `description` and empty `prefillAmount`.
 
   ![img_5.png](app/src/img_5.png)
 
