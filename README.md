@@ -87,7 +87,7 @@ override fun onCreate() {
 
 | Error name | Description |
 | :----: | :----: |
-| NoNetworkError | Error that occurs during payment, means that user haven't internet connection |
+| NoNetworkError | Error that occurs during payment, means that user doesn't have internet connection |
 | PaymentFailure | Error may happen while proceed payment |
 | ProcessingFailure | Errors may happen while processing return one of the next payment statuses: `Failure`, `Rejected` or when processing return `Pending` or `Waiting` for a long period of time. |
 | NotFound3ds | Error may happen when payment requires 3ds url but not provide it. This error is rarely occurring but should be handled | 
