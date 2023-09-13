@@ -5,9 +5,10 @@ constructed parts and some can't.
 
 | Description             |              ![img_6.jpg](app/src/img_6.jpg)  ![img_6_1.jpg](app/src/img_6_1.jpg)              |                               ![img_7.jpg](app/src/img_7.jpg)                                |
 |  :------------------:   |:----------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------:|
-| 1st part (amount section)    |      UI section which includes input field for entering amount and GPay button (optional)      | UI section which includes fixed amount and GPay button (optional). Amount can't be changed |
-| 2nd part (card data section) |                                The form for entering card data                                 |                              The form for entering card data                               |
-| Pay button                 | Goes active when user fills out all data in amount part (1st part) and card section (2nd part) |          Goes active when user fill out all card data in card section (2nd part)           
+| 1st section (amount section)    |      UI section which includes input field for entering amount and GPay button (optional)      | UI section which includes fixed amount and GPay button (optional). Amount can't be changed |
+| 2nd section (tokenized cards section) |        The form for choosing the tokenized cards (optional)           |         The form for choosing the tokenized cards (optional) 
+| 3d section (card data section) |                                The form for entering card data                    |             The form for entering card data   |
+| Pay button  section   | Goes active in such cases: <ul><li> when user fills out all data in amount part (1st section) and choses the tokenized card (2nd sections) </li> <li> when user fills out all data in amount part (1st section) and in card form (3d section)  </li></ul>   |          Goes active when user chooses the tokenized card (2nd selection) or fills out all data in card form (3d selection)          
 
 # Installation process:
 
