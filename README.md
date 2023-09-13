@@ -189,17 +189,18 @@ c) Create `AmountType` object that contains all necessary information about paym
   ![img_5.png](app/src/img_5.png)
 
   `CardToken` is a class that contains all required information for processing payments with tokenized cards, class has the following structure:
-```kotlin
-data class CardToken(
-    val ccMask: String,
-    val ccToken: String,
-    val isDefault: Boolean,
-)
-```
-Passing the `list<CardToken>` in the `AmountType` will impact the user screen by adding the 3d section (section for tokenized cards). 
+   ```kotlin
+   data class CardToken(
+       val ccMask: String,
+       val ccToken: String,
+       val isDefault: Boolean,
+   )
+   ```
+   Passing the `list<CardToken>` in the `AmountType` will impact the user screen by adding the 3d section (section for tokenized cards). 
+   ![img_9.png](app/src/img_9.jpg)
 
-When user clicks on this section library opens bottom sheet dialog with the list of all provided `CardToken`s. 
-
+   When user clicks on this section library opens bottom sheet dialog with the list of all provided `CardToken`s. 
+   ![img_11.png](app/src/img_11.jpg)
 
 d) Create `AdditionalData` object that contains all additional information. 
 
