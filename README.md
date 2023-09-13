@@ -85,14 +85,16 @@ override fun onCreate() {
 `Cancel` occurs when user presses *back button* on payment screen.
 
 `Error` is a `sealed class` for error's representation. Below you can find a table of errors and their description:
-
+<details>
+<summary>Errors table</summary>
+ 
 | Error name | Description |
 | :----: | :----: |
 | NoNetworkError | Error that occurs during payment, means that user doesn't have internet connection |
 | PaymentFailure | Error may happen while proceed payment |
 | ProcessingFailure | Errors may happen while processing return one of the next payment statuses: `Failure`, `Rejected` or when processing return `Pending` or `Waiting` for a long period of time. |
 | NotFound3ds | Error may happen when payment requires 3ds url but not provide it. This error is rarely occurring but should be handled | 
-
+</details>
 
 #### 4) Prepare payment data for sending:
 For sending data to the library you need to initialize the library provided data holder object `PaymentContractInput`. The structure of `PaymentContractInput`: 
@@ -154,7 +156,7 @@ c) Create `AmountType` object that contains all necessary information about paym
     ```
   `description` is the text will be displayed to user on the payment screen. Please, provide a
   readable product description.
-  `tokens` is the list of `CardToken` objects. Empty by default. 
+  `tokens` is the list of `CardToken` objects. Empty by default. Creation of this object and its impact on merchant screen is described in the end of this list point.
 
   The UI example with fixed amount and product description:
 
@@ -176,7 +178,7 @@ c) Create `AmountType` object that contains all necessary information about paym
 
   `description` is the text will be displayed to user on the payment screen. Please, provide a
   readable product description.
-  `tokens` is the list of `CardToken` objects. Empty by default. 
+  `tokens` is the list of `CardToken` objects. Empty by default. Creation of this object and its impact on merchant screen is described in the end of this list point.
 
   The UI example with customizable amount, `prefillAmount` and product `description`:
 
@@ -185,6 +187,18 @@ c) Create `AmountType` object that contains all necessary information about paym
   The UI example with customizable amount, `description` and empty `prefillAmount`.
 
   ![img_5.png](app/src/img_5.png)
+
+  `CardToken` is a class that contains all required information for processing payments with tokenized cards, class has the following structure:
+```kotlin
+data class CardToken(
+    val ccMask: String,
+    val ccToken: String,
+    val isDefault: Boolean,
+)
+```
+Passing the `list<CardToken>` in the `AmountType` will impact the user screen by adding the 3d section (section for tokenized cards). 
+
+When user clicks on this section library opens bottom sheet dialog with the list of all provided `CardToken`s. 
 
 
 d) Create `AdditionalData` object that contains all additional information. 
