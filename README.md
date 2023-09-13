@@ -3,7 +3,7 @@
 Payment screen consists of UI sections. Some of the sections can be replaced by merchant from already
 constructed parts and some can't.
 
-| Description             |              ![img_6.jpg](app/src/img_6.jpg)  ![img_6_1.jpg](app/src/img_6_1.jpg)              |                               ![img_7.jpg](app/src/img_7.jpg)                                |
+| Description             |              ![img_6.jpg](app/src/img_6.jpg)               |                               ![img_7.jpg](app/src/img_7.jpg)                                |
 |  :------------------:   |:----------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------:|
 | 1st section (amount section)    |      UI section which includes input field for entering amount and GPay button (optional)      | UI section which includes fixed amount and GPay button (optional). Amount can't be changed |
 | 2nd section (tokenized cards section) |        The form for choosing the tokenized cards (optional)           |         The form for choosing the tokenized cards (optional) 
