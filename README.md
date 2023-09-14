@@ -196,10 +196,16 @@ data class CardToken(
     val isDefault: Boolean,
 )
 ```
-Passing the `list<CardToken>` in the `AmountType` will impact the user screen by adding the 3d section (section for tokenized cards). 
+Passing the `list<CardToken>` in the `AmountType` will impact the user screen by adding the 2d section (section for tokenized cards).
+![img_9.jpg](app/src/img_9.jpg)
 
-When user clicks on this section library opens bottom sheet dialog with the list of all provided `CardToken`s. 
+When user clicks on this section library opens bottom sheet dialog with the list of all provided `CardToken`s.
 
+![img_11.png](app/src/img_11.png)
+
+Selecting some card will close the bottom sheet, update the 2d section (section for tokenized cards) and remove the 3d section(manual card input section).
+
+![img_10.png](app/src/img_10.png)
 
 d) Create `AdditionalData` object that contains all additional information. 
 
@@ -224,14 +230,30 @@ val additionalData = AdditionalData(
 `merchantMcc` - MCC for this transaction. \
 `payload` - custom string data. Max 4000 symbols.
 
+e) OPTIONAL: pass the predefined fields for 3d section (manual card data input section):
+```kotlin
+// not required
+val cardModel = CardModel(
+  cardInput = InputCardModel(
+    number = "4242424242424242",
+    expirationMonth = "11",
+    expirationYear = "24",
+    cvv = "123"
+  ),
+  supportedPaymentSystems = listOf<PaymentSystemType>(...) // default = listOf(PaymentSystemType.VISA, PaymentSystemType.MASTERCARD)
+)
+```
+
 #### 5) Make a request for payment processing
 
 ```kotlin
 paymentLauncher.launch(
     PaymentContractInput(
-        keyConfig,
-        customerData,
-        amountType,
+        keyConfig = keyConfig,
+        customerData = customerData,
+        amountType = amountType,
+        additionalData = additionalData,
+        cardModel = cardModel,
     )
 )
 ```
@@ -293,5 +315,8 @@ Override text resources to change the text values.
     <string name="tranzzo_year">РР</string>
     <string name="tranzzo_cvv">CVV</string>
     <string name="tranzzo_payment_processing">Обробка платежу</string>
+    <string name="tranzzo_saved_cards">Збережені картки</string>
+    <string name="tranzzo_non_tokenized_card">Інша картка</string>
+    <string name="tranzzo_choose_tokenized_card">Обрати збережену картку</string>
 ```
 
