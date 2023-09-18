@@ -15,7 +15,7 @@ constructed parts and some can't.
 #### 1) Add the dependency in the project:
 Add following dependency in `build.gradle`:
 
-```implementation 'com.tranzzo.android:payment_merchant:3.0.1'```.
+```implementation 'com.tranzzo.android:payment_merchant:3.1.2'```.
 
 Add following code to your `settings.gradle` file in `repositories` section:
 ```groovy
