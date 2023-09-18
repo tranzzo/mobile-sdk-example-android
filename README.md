@@ -3,18 +3,19 @@
 Payment screen consists of UI sections. Some of the sections can be replaced by merchant from already
 constructed parts and some can't.
 
-| Description             | ![img_6.png](app/src/img_6.png)  | ![img_7.png](app/src/img_7.png) |
-|  :------------------:   |  :-------------------:   |  :------------------:   |
-| 1st part (amount section)    | UI section which includes input field for entering amount and GPay button (optional) | UI section which includes fixed amount and GPay button (optional). Amount can't be changed |
-| 2nd part (card data section) | The form for entering card data  |  The form for entering card data |
-| Pay button                 | Goes active when user fills out all data in amount part (1st part) and card section (2nd part)  | Goes active when user fill out all card data in card section (2nd part)
+| Description             |              ![img_6.jpg](app/src/img_6.jpg)               |                               ![img_7.jpg](app/src/img_7.jpg)                                |
+|  :------------------:   |:----------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------:|
+| 1st section (amount section)    |      UI section which includes input field for entering amount and GPay button (optional)      | UI section which includes fixed amount and GPay button (optional). Amount can't be changed |
+| 2nd section (tokenized cards section) |        The form for choosing the tokenized cards (optional)           |         The form for choosing the tokenized cards (optional) 
+| 3d section (card data section) |                                The form for entering card data                    |             The form for entering card data   |
+| Pay button  section   | Goes active in such cases: <ul><li> when user fills out all data in amount part (1st section) and choses the tokenized card (2nd sections) </li> <li> when user fills out all data in amount part (1st section) and in card form (3d section)  </li></ul>   |          Goes active when user chooses the tokenized card (2nd selection) or fills out all data in card form (3d selection)          
 
 # Installation process:
 
 #### 1) Add the dependency in the project:
 Add following dependency in `build.gradle`:
 
-```implementation 'com.tranzzo.android:payment_merchant:3.0.1'```.
+```implementation 'com.tranzzo.android:payment_merchant:3.1.2'```.
 
 Add following code to your `settings.gradle` file in `repositories` section:
 ```groovy
@@ -76,7 +77,7 @@ override fun onCreate() {
 }
 ```
 
-`PaymentContractInput` class that you will create for payment creation and processing.
+`PaymentContractInput` class that you will fill up with data for payment creation and processing. Object creation is described below from point 4) to point 5) in the list.
 
 `PaymentContractOutput` class that will provide you with an information about payment result.
 `PaymentContractOutput` will be one of following possible instances: `Success` or `Error`, or `Cancel`.
@@ -84,16 +85,30 @@ override fun onCreate() {
 `Cancel` occurs when user presses *back button* on payment screen.
 
 `Error` is a `sealed class` for error's representation. Below you can find a table of errors and their description:
-
+<details>
+<summary>Errors table</summary>
+ 
 | Error name | Description |
 | :----: | :----: |
-| NoNetworkError | Error that occurs during payment, means that user haven't internet connection |
+| NoNetworkError | Error that occurs during payment, means that user doesn't have internet connection |
 | PaymentFailure | Error may happen while proceed payment |
 | ProcessingFailure | Errors may happen while processing return one of the next payment statuses: `Failure`, `Rejected` or when processing return `Pending` or `Waiting` for a long period of time. |
 | NotFound3ds | Error may happen when payment requires 3ds url but not provide it. This error is rarely occurring but should be handled | 
-
+</details>
 
 #### 4) Prepare payment data for sending:
+For sending data to the library you need to initialize the library provided data holder object `PaymentContractInput`. The structure of `PaymentContractInput`: 
+```kotlin
+// library code
+data class PaymentContractInput(
+    val keyConfig: KeyConfig,
+    val customerData: CustomerData,
+    val amountType: AmountType,
+    val additionalData: AdditionalData = AdditionalData(),
+    val cardModel: CardModel = CardModel(),
+)
+```
+Follow me for `PaymentContractInput` creation:
 
 a) Create `KeyConfig` object:
 
@@ -136,10 +151,12 @@ c) Create `AmountType` object that contains all necessary information about paym
         amount = 1.11, // Double
         description = "your_product_description",
         orderId = "your_order_id",
+        tokens = listOf<CardToken>(), // optional, emptyList() by default
    )
     ```
   `description` is the text will be displayed to user on the payment screen. Please, provide a
   readable product description.
+  `tokens` is the list of `CardToken` objects. Empty by default. Creation of this object and its impact on merchant screen is described in the end of this list point.
 
   The UI example with fixed amount and product description:
 
@@ -153,6 +170,7 @@ c) Create `AmountType` object that contains all necessary information about paym
                                                    // Can be empty
             description = "your_product_description",
             orderId = "your_order_id",
+            tokens = listOf<CardToken>(), // optional, emptyList() by default
         )
     ```
   `prefillAmount` is a list of already predefined amount values. Can be empty, but isn't empty by
@@ -160,15 +178,34 @@ c) Create `AmountType` object that contains all necessary information about paym
 
   `description` is the text will be displayed to user on the payment screen. Please, provide a
   readable product description.
+  `tokens` is the list of `CardToken` objects. Empty by default. Creation of this object and its impact on merchant screen is described in the end of this list point.
 
-  The UI example with customizable amount, `prefillAmount` and product description:
+  The UI example with customizable amount, `prefillAmount` and product `description`:
 
   ![img_4.png](app/src/img_4.png)
 
-  The UI example with customizable amount, description and empty `prefillAmount`.
+  The UI example with customizable amount, `description` and empty `prefillAmount`.
 
   ![img_5.png](app/src/img_5.png)
 
+  `CardToken` is a class that contains all required information for processing payments with tokenized cards, class has the following structure:
+```kotlin
+data class CardToken(
+    val ccMask: String,
+    val ccToken: String,
+    val isDefault: Boolean,
+)
+```
+Passing the `list<CardToken>` in the `AmountType` will impact the user screen by adding the 2d section (section for tokenized cards).
+![img_9.jpg](app/src/img_9.jpg)
+
+When user clicks on this section library opens bottom sheet dialog with the list of all provided `CardToken`s.
+
+![img_11.png](app/src/img_11.png)
+
+Selecting some card will close the bottom sheet, update the 2d section (section for tokenized cards) and remove the 3d section(manual card input section).
+
+![img_10.png](app/src/img_10.png)
 
 d) Create `AdditionalData` object that contains all additional information. 
 
@@ -193,14 +230,30 @@ val additionalData = AdditionalData(
 `merchantMcc` - MCC for this transaction. \
 `payload` - custom string data. Max 4000 symbols.
 
+e) OPTIONAL: pass the predefined fields for 3d section (manual card data input section):
+```kotlin
+// not required
+val cardModel = CardModel(
+  cardInput = InputCardModel(
+    number = "4242424242424242",
+    expirationMonth = "11",
+    expirationYear = "24",
+    cvv = "123"
+  ),
+  supportedPaymentSystems = listOf<PaymentSystemType>(...) // default = listOf(PaymentSystemType.VISA, PaymentSystemType.MASTERCARD)
+)
+```
+
 #### 5) Make a request for payment processing
 
 ```kotlin
 paymentLauncher.launch(
     PaymentContractInput(
-        keyConfig,
-        customerData,
-        amountType,
+        keyConfig = keyConfig,
+        customerData = customerData,
+        amountType = amountType,
+        additionalData = additionalData,
+        cardModel = cardModel,
     )
 )
 ```
@@ -262,5 +315,8 @@ Override text resources to change the text values.
     <string name="tranzzo_year">РР</string>
     <string name="tranzzo_cvv">CVV</string>
     <string name="tranzzo_payment_processing">Обробка платежу</string>
+    <string name="tranzzo_saved_cards">Збережені картки</string>
+    <string name="tranzzo_non_tokenized_card">Інша картка</string>
+    <string name="tranzzo_choose_tokenized_card">Обрати збережену картку</string>
 ```
 
