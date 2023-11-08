@@ -17,7 +17,8 @@ class App : Application() {
                 environment = SdkEnvironment.TEST
             ),
             currency = "UAH",
-            countryCode = "UA"
+            countryCode = "UA",
+            loggerEnabled = true,
         )
     }
 }

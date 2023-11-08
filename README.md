@@ -15,7 +15,7 @@ constructed parts and some can't.
 #### 1) Add the dependency in the project:
 Add following dependency in `build.gradle`:
 
-```implementation 'com.tranzzo.android:payment_merchant:3.1.2'```.
+```implementation 'com.tranzzo.android:payment_merchant:3.2.3-rc1'```.
 
 Add following code to your `settings.gradle` file in `repositories` section:
 ```groovy
@@ -37,7 +37,8 @@ TranzzoPaymentSDK.init(
     sdkEnvironment = SdkEnvironment.TEST / SdkEnvironment.PROD,
     googlePayConfig = GooglePayConfig(...), // null by default
     currency = "USD",
-    countryCode = "USA"
+    countryCode = "USA",
+    loggeerEnabled = true,
 )
 ```
 `googlePayConfig` is `null` by default. This config gives user the possibility to pay with
@@ -92,7 +93,6 @@ override fun onCreate() {
 | :----: | :----: |
 | NoNetworkError | Error that occurs during payment, means that user doesn't have internet connection |
 | PaymentFailure | Error may happen while proceed payment |
-| ProcessingFailure | Errors may happen while processing return one of the next payment statuses: `Failure`, `Rejected` or when processing return `Pending` or `Waiting` for a long period of time. |
 | NotFound3ds | Error may happen when payment requires 3ds url but not provide it. This error is rarely occurring but should be handled | 
 </details>
 
@@ -257,7 +257,33 @@ paymentLauncher.launch(
     )
 )
 ```
-That's it. Wait for response in point #3 of this list.
+That's it. Wait for response(PaymentModel) in point #3 of this list.
+
+### PaymentStatus
+```kotlin
+enum class PaymentStatus {
+  SUCCESS,
+  FAILURE,
+  PENDING;
+}
+```
+
+#### SUCCESS
+
+This status indicates that the transaction has been processed successfully.
+
+#### FAILURE
+
+This status indicates that the transaction has been rejected. The reasons for this may include 
+specific errors at any stage of the payment process, such as incorrect payment data, activation 
+of limits and checks, insufficient funds, and so on.
+
+#### PENDING
+
+This status is applicable to all types of transactions and indicates that the transaction is being 
+processed by the bank or payment system. The SDK checks this status on its own and re-requests the 
+status until it receives SUCCESS or FAILURE. But if the status does not change within 60 seconds, 
+the client receives the PENDING status.
 
 # UI customization
 
