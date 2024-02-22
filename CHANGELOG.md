@@ -12,6 +12,23 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.4.7] - 23.02.2024
+
+### Added
+
+- `Payment3DsByPassType` in `AdditionalData`
+- `unit` in `Product`
+- `taxes` in `Product`
+
+### Changed
+
+- `product.qty` from `Long` to `Double`
+
+### Fixed
+
+- `browserTimeZoneOffset`
+
+
 ## [3.3.4] - 12.12.2023
 
 ### Fixed
