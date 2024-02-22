@@ -15,7 +15,7 @@ constructed parts and some can't.
 #### 1) Add the dependency in the project:
 Add following dependency in `build.gradle`:
 
-```implementation 'com.tranzzo.android:payment_merchant:3.3.4'```.
+```implementation 'com.tranzzo.android:payment_merchant:3.4.7'```.
 
 Add following code to your `settings.gradle` file in `repositories` section:
 ```groovy
@@ -224,11 +224,12 @@ val additionalData = AdditionalData(
     payload = "", // String
 )
 ```
->`method` - payment method according with your business. \
-`serverUrl` - callback url on your server \
-`products` - array of products that are being paid for. \
-`merchantMcc` - MCC for this transaction. \
-`payload` - custom string data. Max 4000 symbols.
+>`method` - payment method according with your business.\
+>`payment3DsByPassType` - use of the 3DS protocol(default - **Supported**).\
+>`serverUrl` - callback url on your server \
+>`products` - array of products that are being paid for. \
+>`merchantMcc` - MCC for this transaction. \
+>`payload` - custom string data. Max 4000 symbols.
 
 e) OPTIONAL: pass the predefined fields for 3d section (manual card data input section):
 ```kotlin
