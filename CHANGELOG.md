@@ -12,6 +12,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.4.8] - 05.03.2024
+
+### Fixed
+
+- Crash in release mode
+
 ## [3.4.7] - 23.02.2024
 
 ### Added
