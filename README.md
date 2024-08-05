@@ -15,7 +15,7 @@ constructed parts and some can't.
 #### 1) Add the dependency in the project:
 Add following dependency in `build.gradle`:
 
-```implementation 'com.tranzzo.android:payment_merchant:3.4.8'```.
+```implementation 'com.tranzzo.android:payment_merchant:3.5.0'```.
 
 Add following code to your `settings.gradle` file in `repositories` section:
 ```groovy
@@ -188,7 +188,23 @@ c) Create `AmountType` object that contains all necessary information about paym
 
   ![img_5.png](app/src/img_5.png)
 
-  `CardToken` is a class that contains all required information for processing payments with tokenized cards, class has the following structure:
+- Payment card verification is a process that ensures the validity of the payer's card, confirms its absence in blacklists, and establishes the likelihood of its use by the rightful owner (cardholder) even before the primary financial transaction is initiated:
+
+```kotlin
+AmountType.Lookup(
+    description = "Test description",
+    orderId = "your_order_id",
+)
+```
+
+The UI example:
+
+  ![img_13.jpg](app/src/img_13.jpg)
+
+  `tranzzo_add_card` - resource ID for change button text
+
+`CardToken` is a class that contains all required information for processing payments with tokenized cards, class has the following structure:
+
 ```kotlin
 data class CardToken(
     val ccMask: String,
@@ -345,5 +361,6 @@ Override text resources to change the text values.
     <string name="tranzzo_saved_cards">Збережені картки</string>
     <string name="tranzzo_non_tokenized_card">Інша картка</string>
     <string name="tranzzo_choose_tokenized_card">Обрати збережену картку</string>
+    <string name="tranzzo_add_card">Додати картку</string>
 ```
 

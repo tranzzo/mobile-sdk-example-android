@@ -12,6 +12,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.5.0] - 05.08.2024
+
+### Added
+
+- Lookup method
+
 ## [3.4.8] - 05.03.2024
 
 ### Fixed
