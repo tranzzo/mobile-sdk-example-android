@@ -12,6 +12,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.5.2] - 04.12.2024
+
+### Added
+
+- params `googlePlayEnabled` and `cardFormEnabled` to `AmountType.ConstantAmount` and `AmountType.FreeAmount`
+
 ## [3.5.0] - 05.08.2024
 
 ### Added

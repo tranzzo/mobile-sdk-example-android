@@ -15,7 +15,7 @@ constructed parts and some can't.
 #### 1) Add the dependency in the project:
 Add following dependency in `build.gradle`:
 
-```implementation 'com.tranzzo.android:payment_merchant:3.5.0'```.
+```implementation 'com.tranzzo.android:payment_merchant:3.5.2'```.
 
 Add following code to your `settings.gradle` file in `repositories` section:
 ```groovy
@@ -152,6 +152,8 @@ c) Create `AmountType` object that contains all necessary information about paym
         description = "your_product_description",
         orderId = "your_order_id",
         tokens = listOf<CardToken>(), // optional, emptyList() by default
+        googlePlayEnabled = true, // optional, true by default
+        cardFormEnabled = true, // optional, true by default
    )
     ```
   `description` is the text will be displayed to user on the payment screen. Please, provide a
@@ -171,6 +173,8 @@ c) Create `AmountType` object that contains all necessary information about paym
             description = "your_product_description",
             orderId = "your_order_id",
             tokens = listOf<CardToken>(), // optional, emptyList() by default
+            googlePlayEnabled = true, // optional, true by default
+            cardFormEnabled = true, // optional, true by default
         )
     ```
   `prefillAmount` is a list of already predefined amount values. Can be empty, but isn't empty by
