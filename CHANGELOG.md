@@ -12,6 +12,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.5.3] - 08.01.2025
+
+### Changed
+
+- updated dependencies
+- updated Google Pay Button API
+- added support for Android 15
+
 ## [3.5.2] - 04.12.2024
 
 ### Added
