@@ -12,6 +12,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [3.6.4] - 20.10.2025
+
+### Changed
+
+- fixed 16kb issue
+
 ## [3.5.3] - 08.01.2025
 
 ### Changed
