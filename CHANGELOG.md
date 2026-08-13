@@ -12,6 +12,18 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [4.0.2] - 13.08.2026
+
+### Changed
+
+- test server for `SdkEnvironment.TEST` from `sdk-stg.tranzzo.com` to `sdk.dev.tranzzo.com`, production is unchanged
+- minimum requirements: compileSdk 36, JDK 17, Kotlin 2.0+ (minSdk 23 unchanged)
+
+### Fixed
+
+- crash on the payment screen on Android 15+ (`NoClassDefFoundError: androidx.core.view.insets.ProtectionLayout`)
+- if you pinned `androidx.core` via `resolutionStrategy.force` as a workaround, remove it, otherwise the crash comes back
+
 ## [3.6.4] - 20.10.2025
 
 ### Changed

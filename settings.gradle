@@ -11,9 +11,14 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
+            // Supply your merchant credentials via ~/.gradle/gradle.properties or environment variables.
             credentials {
-                username "merchant_username"
-                password "merchant_password"
+                username = providers.gradleProperty("SONATYPE_NEXUS_USERNAME")
+                        .orElse(providers.environmentVariable("SONATYPE_NEXUS_USERNAME"))
+                        .getOrElse("merchant_username")
+                password = providers.gradleProperty("SONATYPE_NEXUS_PASSWORD")
+                        .orElse(providers.environmentVariable("SONATYPE_NEXUS_PASSWORD"))
+                        .getOrElse("merchant_password")
             }
             url "https://nexus.tranzzo.com/repository/merchant-release-mvn/"
         }

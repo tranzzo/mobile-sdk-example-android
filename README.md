@@ -15,19 +15,29 @@ constructed parts and some can't.
 #### 1) Add the dependency in the project:
 Add following dependency in `build.gradle`:
 
-```implementation 'com.tranzzo.android:payment_merchant:3.6.4'```.
+```implementation 'com.tranzzo.android:payment_merchant:4.0.2'```.
 
 Add following code to your `settings.gradle` file in `repositories` section:
 ```groovy
  repositories {
         maven {
             credentials {
-              username "merchant_username"
-              password "merchant_password"
+                username = providers.gradleProperty("SONATYPE_NEXUS_USERNAME")
+                        .orElse(providers.environmentVariable("SONATYPE_NEXUS_USERNAME"))
+                        .getOrElse("merchant_username")
+                password = providers.gradleProperty("SONATYPE_NEXUS_PASSWORD")
+                        .orElse(providers.environmentVariable("SONATYPE_NEXUS_PASSWORD"))
+                        .getOrElse("merchant_password")
             }
             url "https://nexus.tranzzo.com/repository/merchant-release-mvn/"
         }
     }
+```
+
+Keep your merchant credentials out of version control — put them in `~/.gradle/gradle.properties`:
+```properties
+SONATYPE_NEXUS_USERNAME=your_merchant_username
+SONATYPE_NEXUS_PASSWORD=your_merchant_password
 ```
 
 #### 2) Init the TranzzoPaymentSDK library in the Application class. For example:
