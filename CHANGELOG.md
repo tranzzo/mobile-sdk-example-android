@@ -12,6 +12,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [4.0.3] - 26.08.2026
+
+### Fixed
+
+- WebView success callback after 3DS — the payment screen stayed open and `PaymentContract` never returned a result
+
 ## [4.0.2] - 13.08.2026
 
 ### Changed

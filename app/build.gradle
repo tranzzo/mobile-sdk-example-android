@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.tranzzo.android:payment_merchant:4.0.2'
+    implementation 'com.tranzzo.android:payment_merchant:4.0.3'
     implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
     implementation "androidx.core:core-ktx:$core_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
